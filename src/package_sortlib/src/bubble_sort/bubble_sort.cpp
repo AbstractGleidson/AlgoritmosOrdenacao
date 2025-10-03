@@ -1,0 +1,21 @@
+#include "bubble_sort.h"
+
+// Bubble Sort implementacao
+std::vector<std::string> bubble_sort(std::vector<std::string> arr) {
+    int n = arr.size();
+    bool swapped;
+
+    for (int i = 0; i < n - 1; i++) {
+        swapped = false;
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {   // compara strings 
+                std::swap(arr[j], arr[j + 1]);
+                swapped = true;
+            }
+        }
+        if (!swapped)
+            break;
+    }
+
+    return arr;  // Retorna o vetor ordenado
+}
