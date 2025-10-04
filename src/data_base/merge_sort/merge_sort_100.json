@@ -1,0 +1,27 @@
+[
+    {
+        "algoritimo": "merge_sort_100",
+        "quantidade_palavras": 100,
+        "tempo": 0.09375
+    },
+    {
+        "algoritimo": "merge_sort_100",
+        "quantidade_palavras": 100,
+        "tempo": 0.109375
+    },
+    {
+        "algoritimo": "merge_sort_100",
+        "quantidade_palavras": 100,
+        "tempo": 0.109375
+    },
+    {
+        "algoritimo": "merge_sort_100",
+        "quantidade_palavras": 100,
+        "tempo": 0.09375
+    },
+    {
+        "algoritimo": "merge_sort_100",
+        "quantidade_palavras": 100,
+        "tempo": 0.09375
+    }
+]

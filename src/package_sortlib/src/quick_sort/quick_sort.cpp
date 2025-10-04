@@ -1,3 +1,4 @@
+// Implementacao do algoritimo de ordenacao quicksort
 #include "quick_sort.h"
 #include <algorithm>  // para std::swap
 

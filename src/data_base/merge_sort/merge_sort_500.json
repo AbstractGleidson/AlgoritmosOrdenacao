@@ -1,0 +1,28 @@
+[
+    {
+        "algoritimo": "merge_sort_500",
+        "quantidade_palavras": 500,
+        "tempo": 0.546875
+    },
+    {
+        "algoritimo": "merge_sort_500",
+        "quantidade_palavras": 500,
+        "tempo": 0.546875
+    },
+    {
+        "algoritimo": "merge_sort_500",
+        "quantidade_palavras": 500,
+        "tempo": 0.5625
+    },
+    {
+        "algoritimo": "merge_sort_500",
+        "quantidade_palavras": 500,
+        "tempo": 0.5625
+    },
+    {
+        "algoritimo": "merge_sort_500",
+        "quantidade_palavras": 500,
+        "tempo": 0.5625
+    }
+]
+

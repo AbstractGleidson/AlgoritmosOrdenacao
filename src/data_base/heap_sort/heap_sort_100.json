@@ -1,0 +1,27 @@
+[
+    {
+        "algoritimo": "heap_sort_100",
+        "quantidade_palavras": 100,
+        "tempo": 0.0625
+    },
+    {
+        "algoritimo": "heap_sort_100",
+        "quantidade_palavras": 100,
+        "tempo": 0.046875
+    },
+    {
+        "algoritimo": "heap_sort_100",
+        "quantidade_palavras": 100,
+        "tempo": 0.0625
+    },
+    {
+        "algoritimo": "heap_sort_100",
+        "quantidade_palavras": 100,
+        "tempo": 0.109375
+    },
+    {
+        "algoritimo": "heap_sort_100",
+        "quantidade_palavras": 100,
+        "tempo": 0.0625
+    }
+]

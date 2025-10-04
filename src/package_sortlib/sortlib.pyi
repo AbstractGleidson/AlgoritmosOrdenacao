@@ -1,3 +1,4 @@
+# Adicionar uma pequena documentao para os metodos
 from typing import List
 
 def bubble_sort(arr: List[str]) -> List[str]:

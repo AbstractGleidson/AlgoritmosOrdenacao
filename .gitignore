@@ -1,2 +1,5 @@
 build
 teste.py
+.vscode
+.gitignore
+__pycache__
