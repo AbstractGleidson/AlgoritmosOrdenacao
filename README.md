@@ -38,7 +38,7 @@ Este projeto tem como objetivo **testar algoritimos de ordenação**, com foco n
 ## Como testar
 Com python instalado:
 ```bash
-git clone https://github.com/AbstractGleidson/AlgoritimosOrdenacao.git
+git clone "https://github.com/AbstractGleidson/AlgoritmosOrdenacao.git"
 pip install -r requirements.txt
 cd src 
 python main.py
