@@ -1,5 +1,10 @@
 build
 teste.py
+<<<<<<< HEAD
 .vscode
 .gitignore
 __pycache__
+=======
+venv/
+__pycache__/
+>>>>>>> refs/remotes/origin/main
