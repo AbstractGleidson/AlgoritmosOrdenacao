@@ -8,16 +8,17 @@ from .widgets.smallWidgets import buttonMainMenu
 from constants import ICON2_PATH, WINDOW_HEIGTH, WINDOW_WIDTH
 from .Charts.generateCharts import MplCanvas
 from matplotlib.ticker import ScalarFormatter
-#from datetime import datetime
+from datetime import datetime
 import sys
-
+import os
 # Herda QMainWindow para ter acesso a alguns componentes da janela em si, como title e icon 
 class MyWindow(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.colors = []
         self.errorMessage = None # Gerencia a messagem de erro na leitura de dado, se ela deve ser exibida ou nao
         self.fileName = None # Gerencia o arquivo que será enviado para ordenar 
-        self.algorithm = None # Gerencia o algorítmo escolhido para ordenação
+        self.algorithm = None # Gerencia o algoritmo escolhido para ordenação
 
 
         self.setWindowTitle("Algoritmos de Ordenação")
@@ -39,12 +40,12 @@ class MyWindow(QMainWindow):
         button_view_graph = buttonMainMenu("Visualizar gráficos de desempenho")
         button_view_graph.clicked.connect(self.showCharts) # Adiciona funcao para esse botao
         
-        # Reinicia os testes dos algorítmos de ordenação
-        button_restart_tests = buttonMainMenu("Reiniciar testes de algorítmos")
-        # button_restart_tests.clicked.connect(self.restartTests) # Adiciona funcao para esse botao
+        # Reinicia os testes dos algoritmos de ordenação
+        button_start_tests = buttonMainMenu("Realizar teste de algoritmo")
+        button_start_tests.clicked.connect(self.startTest) # Adiciona funcao para esse botao
         
         # Compara Algoritmos
-        button_compare_algorithms = buttonMainMenu("Comparar Algorítmos")
+        button_compare_algorithms = buttonMainMenu("Comparar Algoritmos")
         button_compare_algorithms.clicked.connect(self.compareCharts) # Adiciona funcao para esse botao
         
         # Sai da aplicacao
@@ -53,7 +54,7 @@ class MyWindow(QMainWindow):
 
         # Adiciona os botoes no layout
         layout.addWidget(button_view_graph, alignment=CENTER)
-        layout.addWidget(button_restart_tests, alignment=CENTER)
+        layout.addWidget(button_start_tests, alignment=CENTER)
         layout.addWidget(button_compare_algorithms, alignment=CENTER)
         layout.addWidget(button_report, alignment=CENTER)
         
@@ -117,7 +118,7 @@ class MyWindow(QMainWindow):
         x = [100, 250, 500]
 
         # Os valores de Y serão pegos dos dados gerados, os de agora são de exemplo
-        # Altera o gráfico conforme o algorítmo selecionado
+        # Altera o gráfico conforme o algoritmo selecionado
         if algorithm == "Bubble Sort":
             dados = self.canvas.getData("bubble_sort")
             y = [dados[100], dados[250], dados[500]]
@@ -169,6 +170,8 @@ class MyWindow(QMainWindow):
         self.canvas.axes.margins(x=0.05, y=0.1)
         self.canvas.axes.legend()
         self.canvas.figure.tight_layout()
+        # val = datetime.now()  # Importa a data para ter nomes diferentes no arquivo do gráfico
+        # self.canvas.figure.savefig(f"grafico{val}.png", dpi=300, bbox_inches="tight") # Salva o gráfico em PNG com qualidade melhorada
         self.canvas.draw()
 
     def compareCharts(self):
@@ -272,10 +275,12 @@ class MyWindow(QMainWindow):
         self.canvas.axes.ticklabel_format(style='plain', axis='y')
         self.canvas.axes.legend()
         self.canvas.figure.tight_layout()
+        # val = datetime.now()  # Importa a data para ter nomes diferentes no arquivo do gráfico
+        # self.canvas.figure.savefig(f"grafico{val}.png", dpi=300, bbox_inches="tight") # Salva o gráfico em PNG com qualidade melhorada
         self.canvas.draw()
 
 
-    
+
     def updateText(self):
         selected = []
         for i in range(self.model.rowCount()):
@@ -283,7 +288,53 @@ class MyWindow(QMainWindow):
                 selected.append(self.model.item(i).text())
         self.lineEdit.setText(", ".join(selected))
 
+    def startTest(self):
+        FONT = QFont("Arial")
+        FONT.setPixelSize(25)
 
+        # widget e layout da tela
+        widget = QWidget()
+        layout = QVBoxLayout()
+        
+        # Seletor de Algoritmo para escolher quem vai ser usado
+        self.label_select_file = QLabel("Nenhum Arquivo selecionado:")
+        self.label_select_file.setFont(FONT)
+        self.file_button = QPushButton("Selecionar arquivo")
+        self.file_button.setFont(FONT)                # usa a mesma fonte do label
+        self.file_button.setFixedSize(300, 40) 
+        self.file_button.clicked.connect(self.selectFile)
+
+        # Botao para confirmar os dados 
+        button_find = QPushButton("Enviar")
+        button_find.setFont(FONT)
+        button_find.setFixedSize(150, 40)
+        button_find.clicked.connect(self.showMessageDialog)
+
+        # Botão para voltar pro menu principal
+        button_back = QPushButton("Voltar")
+        button_back.setFont(FONT)
+        button_back.setFixedSize(150, 40)
+        button_back.clicked.connect(self.showMainMenu)
+
+        # Adiciona os Widgets no layout
+        layout.addWidget(self.label_select_file, alignment=Qt.AlignmentFlag.AlignCenter)
+        layout.addWidget(self.file_button, alignment=Qt.AlignmentFlag.AlignCenter)
+        layout.addWidget(button_find, alignment=Qt.AlignmentFlag.AlignCenter)
+        layout.addWidget(button_back, alignment=Qt.AlignmentFlag.AlignCenter)
+
+        widget.setLayout(layout)
+        self.setCentralWidget(widget) # Renderiza o widget criado
+
+    def selectFile(self):
+        file_path, _ = QFileDialog.getOpenFileName(self,"Escolha um arquivo", "", "Arquivos de texto(*.txt)")
+
+        if file_path:
+            self.fileName = file_path
+            self.label_select_file.setText(f"Arquivo selecionado: {os.path.basename(file_path)}")
+    def showMessageDialog(self):
+        arquivo = self.fileName
+        if arquivo:
+           print("OK")
 
     # Sai da aplicacao
     def exitAplication(self):
