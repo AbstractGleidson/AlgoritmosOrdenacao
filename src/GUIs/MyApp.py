@@ -3,7 +3,7 @@
 from PySide6.QtWidgets import QMainWindow, QWidget, QCheckBox, QListWidget, QStyle, QFileDialog  # Principais widgets
 from PySide6.QtWidgets import QGridLayout, QHBoxLayout, QVBoxLayout, QPushButton, QLabel, QComboBox, QLineEdit, QListView, QAbstractItemView
 from PySide6.QtGui import QFont, QIcon, QStandardItemModel, QStandardItem
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QThread, Signal
 from .widgets.smallWidgets import buttonMainMenu
 from constants import ICON2_PATH, WINDOW_HEIGTH, WINDOW_WIDTH
 from .Charts.generateCharts import MplCanvas
@@ -11,14 +11,20 @@ from matplotlib.ticker import ScalarFormatter
 from datetime import datetime
 import sys
 import os
+from teste_automatico.teste_automatico import AutoTeste
+import asyncio
+
 # Herda QMainWindow para ter acesso a alguns componentes da janela em si, como title e icon 
 class MyWindow(QMainWindow):
+    finished = Signal(float) # Sinal que terminou a execucao do algoritimo no caso de um teste de ordenacao
+    
     def __init__(self):
         super().__init__()
         self.colors = []
         self.errorMessage = None # Gerencia a messagem de erro na leitura de dado, se ela deve ser exibida ou nao
         self.fileName = None # Gerencia o arquivo que será enviado para ordenar 
         self.algorithm = None # Gerencia o algoritmo escolhido para ordenação
+        self.autoTeste = None # Gerencia o teste automatico
 
 
         self.setWindowTitle("Algoritmos de Ordenação")
@@ -331,11 +337,26 @@ class MyWindow(QMainWindow):
         if file_path:
             self.fileName = file_path
             self.label_select_file.setText(f"Arquivo selecionado: {os.path.basename(file_path)}")
+            
+            
     def showMessageDialog(self):
         arquivo = self.fileName
+        algoritmo = "quicksort" # Troca pela leitura do nome 
+        
         if arquivo:
-           print("OK")
-
+            
+            # Cria e conecta o sinal
+            self.autoTeste = AutoTeste(algoritmo, arquivo)
+            self.autoTeste.finished.connect(self.end_exec)
+            self.autoTeste.setParent(self) # Mantem a instancia ate o final da execuacao da tarefa
+            self.autoTeste.start()  # Inicia a execução paralela
+            print("Execução iniciada")
+           
+    # Metodo que ouve o final de autoTeste
+    def end_exec(self, tempo_exec):
+        print(f"Tempo de execução: {tempo_exec:.2f}s")
+        self.autoTeste = None  # Libera referência depois de terminar
+           
     # Sai da aplicacao
     def exitAplication(self):
         sys.exit()

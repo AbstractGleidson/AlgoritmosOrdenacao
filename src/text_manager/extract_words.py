@@ -1,4 +1,4 @@
-def extract_words(path) -> list[str] | None:
+def extract_words(path) -> list[str]:
     """
     Args:
         path (str): caminho do arquivo para ser lido
@@ -12,6 +12,6 @@ def extract_words(path) -> list[str] | None:
         list_words = file.read().lower().split() # Ler as palavras do arquivo e separa por espaco
         file.close() # Fecha o arquivo
     except Exception:
-        return None # Caso o arquivo nao exista
+        return [] # Caso o arquivo nao exista
     
     return list_words # lista de palavras
