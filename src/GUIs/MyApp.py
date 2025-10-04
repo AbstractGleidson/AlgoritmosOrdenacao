@@ -1,12 +1,13 @@
 # Cria de fato a interface da aplicacao
 # Para futuras modificacao, e interessante implementar um esquema de navegacao usando QStackedWidget
 from PySide6.QtWidgets import QMainWindow, QWidget, QCheckBox, QListWidget, QStyle, QFileDialog  # Principais widgets
-from PySide6.QtWidgets import QGridLayout, QHBoxLayout, QVBoxLayout, QPushButton, QLabel, QComboBox
-from PySide6.QtGui import QFont, QIcon
+from PySide6.QtWidgets import QGridLayout, QHBoxLayout, QVBoxLayout, QPushButton, QLabel, QComboBox, QLineEdit, QListView, QAbstractItemView
+from PySide6.QtGui import QFont, QIcon, QStandardItemModel, QStandardItem
 from PySide6.QtCore import Qt
 from .widgets.smallWidgets import buttonMainMenu
 from constants import ICON2_PATH, WINDOW_HEIGTH, WINDOW_WIDTH
 from .Charts.generateCharts import MplCanvas
+from matplotlib.ticker import ScalarFormatter
 #from datetime import datetime
 import sys
 
@@ -44,7 +45,7 @@ class MyWindow(QMainWindow):
         
         # Compara Algoritmos
         button_compare_algorithms = buttonMainMenu("Comparar Algorítmos")
-        # button_compare_algorithms.clicked.connect() # Adiciona funcao para esse botao
+        button_compare_algorithms.clicked.connect(self.compareCharts) # Adiciona funcao para esse botao
         
         # Sai da aplicacao
         button_report = buttonMainMenu("Sair")
@@ -81,6 +82,10 @@ class MyWindow(QMainWindow):
         self.canvas.axes.set_title("Desempenho do Algoritmo", fontsize=16)
         self.canvas.axes.set_xlabel("Quantidade de Nomes (Em milhares)")
         self.canvas.axes.set_ylabel("Tempo(ms)")
+        self.canvas.figure.tight_layout()
+        self.canvas.axes.grid(True, which="major", axis="y", linestyle="--", alpha=0.4)
+        self.canvas.axes.margins(x=0.05, y=0.1)
+
         self.canvas.draw()
 
         # Botão para plotar os gráficos do algoritmo selecionado
@@ -127,6 +132,7 @@ class MyWindow(QMainWindow):
 
         if algorithm == "Insertion Sort":
             dados = self.canvas.getData("insertion_sort")
+            y = [dados[100], dados[250], dados[500]]
             self.canvas.axes.clear()
             self.canvas.axes.set_ylabel("Tempo (s)", fontsize=10, labelpad=8)
 
@@ -164,6 +170,119 @@ class MyWindow(QMainWindow):
         self.canvas.axes.legend()
         self.canvas.figure.tight_layout()
         self.canvas.draw()
+
+    def compareCharts(self):
+        FONT = QFont("Arial")
+        FONT.setPixelSize(25)
+
+        # widget e layout da tela
+        widget = QWidget()
+        layout = QVBoxLayout()
+        
+        # Seletor de Algoritmo para escolher quem vai ser usado
+        label_select = QLabel("Selecione os algoritmos:")
+        label_select.setFont(FONT)
+        self.lineEdit = QLineEdit()
+        self.lineEdit.setReadOnly(True)
+        self.view = QListView()
+        self.view.setEditTriggers(QAbstractItemView.NoEditTriggers)
+
+        
+
+        # Botão para plotar os gráficos do algoritmo selecionado
+        button_plot = QPushButton("Gerar gráfico")
+        button_plot.setFont(FONT)
+        button_plot.setFixedSize(200, 40)
+        button_plot.clicked.connect(self.updateMultiChart)
+    
+        # Botão para voltar pro menu principal
+        button_back = QPushButton("Voltar")
+        button_back.setFont(FONT)
+        button_back.setFixedSize(150, 40)
+        button_back.clicked.connect(self.showMainMenu)
+
+        # Canvas do matplotlib
+        self.canvas = MplCanvas(self, width=5, height=4, dpi=100)
+        self.canvas.axes.clear
+        self.canvas.axes.set_title("Desempenho do Algoritmo", fontsize=16)
+        self.canvas.axes.set_xlabel("Quantidade de Nomes (Em milhares)")
+        self.canvas.axes.set_ylabel("Tempo(ms)")
+        self.canvas.figure.tight_layout()
+        self.canvas.axes.grid(True, which="major", axis="y", linestyle="--", alpha=0.4)
+        self.canvas.axes.margins(x=0.05, y=0.1)
+
+        self.canvas.draw()
+
+        self.model = QStandardItemModel()
+        lista = ["Bubble Sort", "Selection Sort", "Insertion Sort", "Shell Sort", "Quick Sort", "Merge Sort", "Heap Sort"]
+        for text in lista:
+            item = QStandardItem(text)
+            item.setCheckable(True)  # adiciona checkbox
+            item.setCheckState(Qt.Unchecked)
+            self.model.appendRow(item)
+        
+        # Adiciona os widgets ao layout
+        layout.addWidget(label_select)
+        layout.addWidget(self.lineEdit)
+        layout.addWidget(self.view)
+        layout.addWidget(self.canvas)
+        layout.addWidget(button_plot, alignment=Qt.AlignmentFlag.AlignCenter)
+        layout.addWidget(button_back, alignment=Qt.AlignmentFlag.AlignCenter)
+
+        self.view.setModel(self.model)
+        self.model.dataChanged.connect(self.updateText)
+
+        widget.setLayout(layout)
+        self.setCentralWidget(widget) # Renderiza na tela o widget criado
+
+    def updateMultiChart(self):
+        x = [100, 250, 500]  # valores fixos de X
+        selected = []
+        for i in range(self.model.rowCount()):
+            if self.model.item(i).checkState() == Qt.Checked:
+                selected.append(self.model.item(i).text())
+
+        if not selected:
+            return  # Nenhum algoritmo selecionado
+        
+        self.canvas.axes.clear()
+        alglog = ["Bubble Sort", "Insertion Sort", "Selection Sort"]
+
+        test = False
+        if any(item in selected for item in alglog):
+            test = True
+        for a in selected:
+            dados = self.canvas.getData(a.lower().replace(" ", "_"))
+            if test: 
+                y = [dados[100], dados[250],dados[500]]
+                self.canvas.axes.set_ylabel("Tempo (s)")
+      
+            else:
+                y = [dados[100] * 1000, dados[250] * 1000, dados[500] * 1000]
+                self.canvas.axes.set_ylabel("Tempo (ms)")
+
+            self.canvas.axes.plot(x, y, marker='o', label=a)
+
+        # Atualiza o canvas
+        self.canvas.axes.set_title(f"Desempenhos", fontsize=16)
+        self.canvas.axes.set_xlabel("Quantidade de Nomes (Em milhares)", fontsize=10, labelpad=8)
+        self.canvas.axes.grid(True, which="major", axis="y", linestyle="--", alpha=0.4)
+        self.canvas.axes.margins(x=0.05, y=0.1)
+        self.canvas.axes.yaxis.set_major_formatter(ScalarFormatter())
+        self.canvas.axes.ticklabel_format(style='plain', axis='y')
+        self.canvas.axes.legend()
+        self.canvas.figure.tight_layout()
+        self.canvas.draw()
+
+
+    
+    def updateText(self):
+        selected = []
+        for i in range(self.model.rowCount()):
+            if self.model.item(i).checkState() == Qt.Checked:
+                selected.append(self.model.item(i).text())
+        self.lineEdit.setText(", ".join(selected))
+
 
 
     # Sai da aplicacao
