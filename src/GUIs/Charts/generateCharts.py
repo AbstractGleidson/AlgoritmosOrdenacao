@@ -26,7 +26,7 @@ class MplCanvas(FigureCanvas):
                 data = json.load(f)
             for j in range (len(data)):
                 soma += data[j]["tempo"]
-            dados[tam[i]] = (soma/5)
+            dados[tam[i]] = (soma/len(data))
         return dados
 
         

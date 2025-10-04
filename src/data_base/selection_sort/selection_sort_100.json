@@ -1,5 +1,7 @@
-{
-    "algoritimo": "selection_sort_100",
-    "quantidade_palavras": 100,
-    "tempo": 43.765625
-}
+[
+    {
+        "algoritimo": "selection_sort_100",
+        "quantidade_palavras": 100,
+        "tempo": 43.765625
+    }
+]
