@@ -71,7 +71,7 @@ class MyWindow(QMainWindow):
         label_select.setFont(FONT)
         self.combo_algorithms = QComboBox()
         self.combo_algorithms.setFont(FONT)
-        self.combo_algorithms.addItems(["Bubble Sort", "Quick Sort", "Merge Sort", "Selection Sort", "Shell Sort", "Heap Sort", "Insertion Sort"])
+        self.combo_algorithms.addItems(["Bubble Sort", "Selection Sort" , "Insertion Sort" , "Shell Sort", "Quick Sort", "Merge Sort", "Heap Sort"])
 
         # Canvas do matplotlib
         self.canvas = MplCanvas(self, width=5, height=4, dpi=100)
@@ -107,44 +107,56 @@ class MyWindow(QMainWindow):
         algorithm = self.combo_algorithms.currentText() # Pega oque está selecionado no combo
 
         # Define as coordenadas de X que são sempre fixas
-        x = [100, 200, 500]
+        x = [100, 250, 500]
 
         # Os valores de Y serão pegos dos dados gerados, os de agora são de exemplo
         # Altera o gráfico conforme o algorítmo selecionado
         if algorithm == "Bubble Sort":
-            y = [8, 90, 2000] 
+            dados = self.canvas.getData("bubble_sort")
+            y = [dados[100], dados[250], dados[500]]
+            self.canvas.axes.clear()
             self.canvas.axes.set_ylabel("Tempo (s)")
         
         if algorithm ==  "Selection Sort":
-            y = [8, 90, 2000] 
+            dados = self.canvas.getData("selection_sort")
+            y = [dados[100], dados[250], dados[500]]
+            self.canvas.axes.clear()
             self.canvas.axes.set_ylabel("Tempo (s)")
 
         if algorithm == "Insertion Sort":
-            y = [8, 90, 2000] 
-            self.canvas.axes.set_ylabel("Tempo (s)")
+            dados = self.canvas.getData("insertion_sort")
+            self.canvas.axes.clear()
+            y = [dados[100], dados[250], dados[500]]
 
         if algorithm ==  "Shell Sort":
-            y = [8, 90, 2000] 
+            dados = self.canvas.getData("shell_sort")
+            y = [dados[100], dados[250], dados[500]]
+            self.canvas.axes.clear()
             self.canvas.axes.set_ylabel("Tempo (s)")
 
         if algorithm == "Quick Sort":
-            y = [8, 90, 2000] 
+            dados = self.canvas.getData("quick_sort")
+            y = [dados[100]*1000, dados[250]*1000, dados[500]*1000]
+            self.canvas.axes.clear()
             self.canvas.axes.set_ylabel("Tempo (ms)")
 
         if algorithm == "Merge Sort":
-            y = [8, 90, 2000] 
-            self.canvas.axes.set_ylabel("Tempo (s)")
+            dados = self.canvas.getData("merge_sort")
+            y = [dados[100]*1000, dados[250]*1000, dados[500]*1000]
+            self.canvas.axes.clear()
+            self.canvas.axes.set_ylabel("Tempo (ms)")
     
         if algorithm == "Heap Sort":
-            y = [8, 90, 2000] 
-            self.canvas.axes.set_ylabel("Tempo (s)")
+            dados = self.canvas.getData("heap_sort")
+            y = [dados[100]*1000, dados[250]*1000, dados[500]*1000]
+            self.canvas.axes.clear()
+            self.canvas.axes.set_ylabel("Tempo (ms)")
             
 
         # Atualiza o canvas
-        self.canvas.axes.clear()
         self.canvas.axes.plot(x, y, marker='o', label=algorithm)
         self.canvas.axes.set_title(f"Desempenho: {algorithm}", fontsize=16)
-        self.canvas.axes.set_xlabel("TQuantidade de Nomes (Em milhares)")
+        self.canvas.axes.set_xlabel("Quantidade de Nomes (Em milhares)")
         self.canvas.axes.legend()
         self.canvas.draw()
 
