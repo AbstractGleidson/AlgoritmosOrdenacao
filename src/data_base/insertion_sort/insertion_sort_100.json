@@ -1,5 +1,27 @@
-{
-    "algoritimo": "insertion_sort_100",
-    "quantidade_palavras": 100,
-    "tempo": 66.984375
-}
+[
+    {
+        "algoritmo": "insertion_sort_100",
+        "quantidade_palavras": 100,
+        "tempo": 34.828125
+    },
+    {
+        "algoritmo": "insertion_sort_100",
+        "quantidade_palavras": 100,
+        "tempo": 35.453125
+    },
+    {
+        "algoritmo": "insertion_sort_100",
+        "quantidade_palavras": 100,
+        "tempo": 34.171875
+    },
+    {
+        "algoritmo": "insertion_sort_100",
+        "quantidade_palavras": 100,
+        "tempo": 34.0625
+    },
+    {
+        "algoritmo": "insertion_sort_100",
+        "quantidade_palavras": 100,
+        "tempo": 34.65625
+    }
+]

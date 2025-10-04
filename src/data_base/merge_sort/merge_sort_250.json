@@ -1,26 +1,26 @@
 [
     {
-        "algoritimo": "merge_sort_250",
+        "algoritmo": "merge_sort_250",
         "quantidade_palavras": 250,
-        "tempo": 0.265625
+        "tempo": 0.25
     },
     {
-        "algoritimo": "merge_sort_250",
+        "algoritmo": "merge_sort_250",
         "quantidade_palavras": 250,
-        "tempo": 0.28125
+        "tempo": 0.25
     },
     {
-        "algoritimo": "merge_sort_250",
+        "algoritmo": "merge_sort_250",
         "quantidade_palavras": 250,
-        "tempo": 0.34375
+        "tempo": 0.25
     },
     {
-        "algoritimo": "merge_sort_250",
+        "algoritmo": "merge_sort_250",
         "quantidade_palavras": 250,
-        "tempo": 0.265625
+        "tempo": 0.234375
     },
     {
-        "algoritimo": "merge_sort_250",
+        "algoritmo": "merge_sort_250",
         "quantidade_palavras": 250,
         "tempo": 0.25
     }

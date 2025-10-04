@@ -1,26 +1,26 @@
 [
     {
-        "algoritimo": "shell_sort_100",
-        "quantidade_palavras": 100,
-        "tempo": 0.125
-    },
-    {
-        "algoritimo": "shell_sort_100",
+        "algoritmo": "shell_sort_100",
         "quantidade_palavras": 100,
         "tempo": 0.109375
     },
     {
-        "algoritimo": "shell_sort_100",
+        "algoritmo": "shell_sort_100",
         "quantidade_palavras": 100,
         "tempo": 0.109375
     },
     {
-        "algoritimo": "shell_sort_100",
+        "algoritmo": "shell_sort_100",
         "quantidade_palavras": 100,
-        "tempo": 0.125
+        "tempo": 0.109375
     },
     {
-        "algoritimo": "shell_sort_100",
+        "algoritmo": "shell_sort_100",
+        "quantidade_palavras": 100,
+        "tempo": 0.109375
+    },
+    {
+        "algoritmo": "shell_sort_100",
         "quantidade_palavras": 100,
         "tempo": 0.109375
     }

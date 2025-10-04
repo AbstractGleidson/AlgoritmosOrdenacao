@@ -3,7 +3,7 @@
 
 std::vector<std::string> bubble_sort(std::vector<std::string> arr) {
     int n = arr.size();
-    bool swapped;
+    bool swapped; // flag para saber se ja esta ordenado
 
     for (int i = 0; i < n - 1; i++) {
         swapped = false;

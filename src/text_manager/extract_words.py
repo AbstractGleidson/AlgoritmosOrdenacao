@@ -9,7 +9,7 @@ def extract_words(path) -> list[str] | None:
         # Abre o arquivo
         file = open(path, "r", encoding="UTF-8")
         
-        list_words = file.read().split() # Ler as palavras do arquivo e separa por espaco
+        list_words = file.read().lower().split() # Ler as palavras do arquivo e separa por espaco
         file.close() # Fecha o arquivo
     except Exception:
         return None # Caso o arquivo nao exista

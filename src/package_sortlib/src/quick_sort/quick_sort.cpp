@@ -4,6 +4,7 @@
 
 // Função de partição para strings
 int partition(std::vector<std::string>& arr, int low, int high) {
+    // Pivo sempre é o ultimo elemento
     std::string pivot = arr[high];
     int i = low - 1;
 
