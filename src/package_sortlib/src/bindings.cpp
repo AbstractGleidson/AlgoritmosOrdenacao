@@ -1,3 +1,4 @@
+// O modulo pybind faz uma "traducao" dos tipos, retornos e etc do c++ para o python
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 
@@ -12,6 +13,7 @@
 
 namespace py = pybind11;
 
+// Define a base da lib a ser gerada para python
 PYBIND11_MODULE(sortlib, m) {
     m.doc() = "Biblioteca de ordenação de strings";
 

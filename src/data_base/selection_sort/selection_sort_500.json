@@ -1,0 +1,12 @@
+[
+    {
+        "algoritimo": "selection_sort_500",
+        "quantidade_palavras": 500,
+        "tempo": 746.234375
+    }, 
+    {
+        "algoritimo": "selection_sort_500",
+        "quantidade_palavras": 500,
+        "tempo": 737.53125
+    }
+]

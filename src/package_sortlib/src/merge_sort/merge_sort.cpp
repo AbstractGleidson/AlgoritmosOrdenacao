@@ -1,3 +1,4 @@
+// Implementacao do algoritimo de ordenacao mergesort
 #include "merge_sort.h"
 
 // Função auxiliar para juntar dois subarrays ordenados

@@ -1,6 +1,6 @@
+// Implementacao do algoritimo de ordenacao bubblesort
 #include "bubble_sort.h"
 
-// Bubble Sort implementacao
 std::vector<std::string> bubble_sort(std::vector<std::string> arr) {
     int n = arr.size();
     bool swapped;

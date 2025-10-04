@@ -1,0 +1,27 @@
+[
+    {
+        "algoritimo": "shell_sort_500",
+        "quantidade_palavras": 500,
+        "tempo": 0.671875
+    },
+    {
+        "algoritimo": "shell_sort_500",
+        "quantidade_palavras": 500,
+        "tempo": 0.6875
+    },
+    {
+        "algoritimo": "shell_sort_500",
+        "quantidade_palavras": 500,
+        "tempo": 0.671875
+    },
+    {
+        "algoritimo": "shell_sort_500",
+        "quantidade_palavras": 500,
+        "tempo": 0.65625
+    },
+    {
+        "algoritimo": "shell_sort_500",
+        "quantidade_palavras": 500,
+        "tempo": 0.65625
+    }
+]
