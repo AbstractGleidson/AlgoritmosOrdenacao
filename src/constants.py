@@ -3,7 +3,7 @@ from pathlib import Path
 # Constantes fundamentais para o funcionamento do programa
 
 # Tamanho da janela principal
-WINDOW_WIDTH = 400 # Vertical
+WINDOW_WIDTH = 600 # Vertical
 WINDOW_HEIGTH = 600 # Horizontal
 
 # Posicao inicial da janela principal

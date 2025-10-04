@@ -55,5 +55,5 @@ def buttonMainMenu(message: str) -> QPushButton:
        
         button = QPushButton(message)
         button.setFont(FONT)
-        button.setFixedSize(580, 60)
+        button.setFixedSize(580, 100)
         return button # retorna o botao

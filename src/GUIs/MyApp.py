@@ -20,7 +20,7 @@ class MyWindow(QMainWindow):
 
 
         self.setWindowTitle("Algoritmos de Ordenação")
-        self.setBaseSize(WINDOW_HEIGTH, WINDOW_WIDTH)
+        self.setFixedSize(WINDOW_HEIGTH, WINDOW_WIDTH)
         self.setWindowIcon(QIcon(ICON2_PATH)) # Troca o icone da janela
         self.showMainMenu()  # Mostra a primeira janela
 
@@ -31,6 +31,8 @@ class MyWindow(QMainWindow):
 
         widget = QWidget() # Widget generico
         layout = QVBoxLayout() # Box vertical
+        
+        layout.setContentsMargins(0, 75, 0, 100) # Mergin no final e no inicio
 
         # Plota os gráficos usando os dados de ordenação
         button_view_graph = buttonMainMenu("Visualizar gráficos de desempenho")
