@@ -1,0 +1,27 @@
+[
+    {
+        "algoritimo": "insertion_sort_500",
+        "quantidade_palavras": 500,
+        "tempo": 1290.1875
+    },
+    {
+        "algoritimo": "insertion_sort_500",
+        "quantidade_palavras": 500,
+        "tempo": 1261.546875
+    },
+    {
+        "algoritimo": "insertion_sort_500",
+        "quantidade_palavras": 500,
+        "tempo": 1243.046875
+    },
+    {
+        "algoritimo": "insertion_sort_500",
+        "quantidade_palavras": 500,
+        "tempo": 1259.953125
+    },
+    {
+        "algoritimo": "insertion_sort_500",
+        "quantidade_palavras": 500,
+        "tempo": 1255.984375
+    }
+]

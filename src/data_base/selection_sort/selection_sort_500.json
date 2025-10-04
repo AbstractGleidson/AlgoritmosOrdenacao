@@ -2,11 +2,26 @@
     {
         "algoritimo": "selection_sort_500",
         "quantidade_palavras": 500,
-        "tempo": 746.234375
-    }, 
+        "tempo": 715.5625
+    },
     {
         "algoritimo": "selection_sort_500",
         "quantidade_palavras": 500,
-        "tempo": 737.53125
+        "tempo": 717.671875
+    },
+    {
+        "algoritimo": "selection_sort_500",
+        "quantidade_palavras": 500,
+        "tempo": 715.71875
+    },
+    {
+        "algoritimo": "selection_sort_500",
+        "quantidade_palavras": 500,
+        "tempo": 718.34375
+    },
+    {
+        "algoritimo": "selection_sort_500",
+        "quantidade_palavras": 500,
+        "tempo": 715.765625
     }
 ]

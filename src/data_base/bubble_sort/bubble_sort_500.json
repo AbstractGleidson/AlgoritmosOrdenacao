@@ -1,0 +1,27 @@
+[
+    {
+        "algoritimo": "bubble_sort_500",
+        "quantidade_palavras": 500,
+        "tempo": 1453.84375
+    },
+    {
+        "algoritimo": "bubble_sort_500",
+        "quantidade_palavras": 500,
+        "tempo": 1419.625
+    },
+    {
+        "algoritimo": "bubble_sort_500",
+        "quantidade_palavras": 500,
+        "tempo": 1327.609375
+    },
+    {
+        "algoritimo": "bubble_sort_500",
+        "quantidade_palavras": 500,
+        "tempo": 1315.25
+    },
+    {
+        "algoritimo": "bubble_sort_500",
+        "quantidade_palavras": 500,
+        "tempo": 1315.984375
+    }
+]
