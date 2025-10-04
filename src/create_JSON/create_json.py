@@ -12,7 +12,7 @@ def create_json(algoritmo: str, quantidade: int, tempo_exec: float, save_dir: Pa
         tempo_exec (float): Tempo de execução em segundos.
     """
     dados = {
-        "algoritimo": algoritmo,
+        "algoritmo": algoritmo,
         "quantidade_palavras": quantidade,
         "tempo": tempo_exec
     }
