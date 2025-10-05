@@ -20,7 +20,6 @@ class MyWindow(QMainWindow):
     
     def __init__(self):
         super().__init__()
-        self.colors = []
         self.errorMessage = None # Gerencia a messagem de erro na leitura de dado, se ela deve ser exibida ou nao
         self.fileName = None # Gerencia o arquivo que será enviado para ordenar 
         self.algorithm = None # Gerencia o algorítmo escolhido para ordenação
@@ -125,6 +124,18 @@ class MyWindow(QMainWindow):
         # Define as coordenadas de X que são sempre fixas
         x = [100, 250, 500]
 
+        # Define as cores que serão usadas
+        colors = {
+            "Bubble Sort": "blue",
+            "Selection Sort": "green",
+            "Insertion Sort": "red",
+            "Shell Sort": "cyan",
+            "Quick Sort": "magenta",
+            "Merge Sort": "yellow",
+            "Heap Sort": "orange"
+        }
+
+
         # Os valores de Y serão pegos dos dados gerados, os de agora são de exemplo
         # Altera o gráfico conforme o algoritmo selecionado
         if algorithm == "Bubble Sort":
@@ -132,46 +143,52 @@ class MyWindow(QMainWindow):
             y = [dados[100], dados[250], dados[500]]
             self.canvas.axes.clear()
             self.canvas.axes.set_ylabel("Tempo (s)", fontsize=10, labelpad=8)
+            self.canvas.axes.plot(x, y, marker='o', label=algorithm, color=colors["Bubble Sort"])
         
         if algorithm ==  "Selection Sort":
             dados = self.canvas.getData("selection_sort")
             y = [dados[100], dados[250], dados[500]]
             self.canvas.axes.clear()
             self.canvas.axes.set_ylabel("Tempo (s)", fontsize=10, labelpad=8)
+            self.canvas.axes.plot(x, y, marker='o', label=algorithm, color=colors["Selection Sort"])
 
         if algorithm == "Insertion Sort":
             dados = self.canvas.getData("insertion_sort")
             y = [dados[100], dados[250], dados[500]]
             self.canvas.axes.clear()
             self.canvas.axes.set_ylabel("Tempo (s)", fontsize=10, labelpad=8)
+            self.canvas.axes.plot(x, y, marker='o', label=algorithm, color=colors["Insertion Sort"])
 
         if algorithm ==  "Shell Sort":
             dados = self.canvas.getData("shell_sort")
             y = [dados[100]*1000, dados[250]*1000, dados[500]*1000]
             self.canvas.axes.clear()
             self.canvas.axes.set_ylabel("Tempo (ms)", fontsize=10, labelpad=8)
+            self.canvas.axes.plot(x, y, marker='o', label=algorithm, color=colors["Shell Sort"])
 
         if algorithm == "Quick Sort":
             dados = self.canvas.getData("quick_sort")
             y = [dados[100]*1000, dados[250]*1000, dados[500]*1000]
             self.canvas.axes.clear()
             self.canvas.axes.set_ylabel("Tempo (ms)", fontsize=10, labelpad=8)
+            self.canvas.axes.plot(x, y, marker='o', label=algorithm, color=colors["Quick Sort"])
 
         if algorithm == "Merge Sort":
             dados = self.canvas.getData("merge_sort")
             y = [dados[100]*1000, dados[250]*1000, dados[500]*1000]
             self.canvas.axes.clear()
             self.canvas.axes.set_ylabel("Tempo (ms)", fontsize=10, labelpad=8)
+            self.canvas.axes.plot(x, y, marker='o', label=algorithm, color=colors["Merge Sort"])
     
         if algorithm == "Heap Sort":
             dados = self.canvas.getData("heap_sort")
             y = [dados[100]*1000, dados[250]*1000, dados[500]*1000]
             self.canvas.axes.clear()
             self.canvas.axes.set_ylabel("Tempo (ms)", fontsize=10, labelpad=8)
+            self.canvas.axes.plot(x, y, marker='o', label=algorithm, color=colors["Heap Sort"])
             
 
         # Atualiza o canvas
-        self.canvas.axes.plot(x, y, marker='o', label=algorithm)
         self.canvas.axes.set_title(f"Desempenho: {algorithm}", fontsize=16)
         self.canvas.axes.set_xlabel("Quantidade de Nomes (Em milhares)", fontsize=10, labelpad=8)
         self.canvas.axes.grid(True, which="major", axis="y", linestyle="--", alpha=0.4)
@@ -239,6 +256,8 @@ class MyWindow(QMainWindow):
         layout.addWidget(self.canvas)
         layout.addWidget(button_plot, alignment=Qt.AlignmentFlag.AlignCenter)
         layout.addWidget(button_back, alignment=Qt.AlignmentFlag.AlignCenter)
+        layout.setContentsMargins(20, 20, 20, 20) # Margens
+
 
         self.view.setModel(self.model)
         self.model.dataChanged.connect(self.updateText)
@@ -248,6 +267,19 @@ class MyWindow(QMainWindow):
 
     def updateMultiChart(self):
         x = [100, 250, 500]  # valores fixos de X
+
+        # Define as cores que serão usadas para a plotagem dos gráficos
+        colors = {
+            "Bubble Sort": "blue",
+            "Selection Sort": "green",
+            "Insertion Sort": "red",
+            "Shell Sort": "cyan",
+            "Quick Sort": "magenta",
+            "Merge Sort": "yellow",
+            "Heap Sort": "orange"
+        }
+
+
         selected = []
         for i in range(self.model.rowCount()):
             if self.model.item(i).checkState() == Qt.Checked:
@@ -272,7 +304,7 @@ class MyWindow(QMainWindow):
                 y = [dados[100] * 1000, dados[250] * 1000, dados[500] * 1000]
                 self.canvas.axes.set_ylabel("Tempo (ms)")
 
-            self.canvas.axes.plot(x, y, marker='o', label=a)
+            self.canvas.axes.plot(x, y, marker='o', label=a, color=colors[a])
 
         # Atualiza o canvas
         self.canvas.axes.set_title(f"Desempenhos", fontsize=16)
@@ -304,39 +336,39 @@ class MyWindow(QMainWindow):
         widget = QWidget()
         layout = QVBoxLayout()
 
-        layout.setContentsMargins(0, 20, 0, 250) # Mergin no final e no inicio
+        layout.setContentsMargins(20, 20, 20, 250) # Margens
 
 
         # Seletor de Algorítmo
         label_select_algorithm = QLabel("Selecione o algoritmo:")
         label_select_algorithm.setFont(FONT)
-        label_select_algorithm.setFixedSize(600, 30)
+        label_select_algorithm.setFixedSize(560, 30)
         label_select_algorithm.setMargin(0)
         self.combo_algorithms = QComboBox()
         self.combo_algorithms.setFont(FONT)
         self.combo_algorithms.addItems(["Bubble Sort", "Selection Sort" , "Insertion Sort" , "Shell Sort", "Quick Sort", "Merge Sort", "Heap Sort"])
-        self.combo_algorithms.setFixedSize(600, 60)
+        self.combo_algorithms.setFixedSize(560, 60)
 
         # Seletor de arquivo para escolher quem vai ser usado
         self.label_select_file = QLabel("Nenhum Arquivo selecionado")
         self.label_select_file.setFont(FONT)
-        self.label_select_file.setFixedSize(600, 30)
+        self.label_select_file.setFixedSize(560, 30)
         self.label_select_file.setMargin(0)
         self.file_button = QPushButton("Selecionar arquivo")
         self.file_button.setFont(FONT)                # usa a mesma fonte do label
-        self.file_button.setFixedSize(600, 60) 
+        self.file_button.setFixedSize(560, 60) 
         self.file_button.clicked.connect(self.selectFile)
 
         # Botao para confirmar os dados 
         button_find = QPushButton("Enviar")
         button_find.setFont(FONT)
-        button_find.setFixedSize(600, 60)
+        button_find.setFixedSize(560, 60)
         button_find.clicked.connect(self.showMessageDialog)
 
         # Botão para voltar pro menu principal
         button_back = QPushButton("Voltar")
         button_back.setFont(FONT)
-        button_back.setFixedSize(600, 60)
+        button_back.setFixedSize(560, 60)
         button_back.clicked.connect(self.showMainMenu)
 
         # Adiciona os Widgets no layout
