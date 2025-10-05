@@ -11,16 +11,27 @@ def create_json(algoritmo: str, quantidade: int, tempo_exec: float, save_dir: Pa
         quantidade (int): Quantidade de palavras processadas.
         tempo_exec (float): Tempo de execução em segundos.
     """
-    dados = {
+    
+    # Json dos dados
+    dado = {
         "algoritmo": algoritmo,
         "quantidade_palavras": quantidade,
         "tempo": tempo_exec
     }
     
-    json_path = save_dir / f"{algoritmo}.json"  # Cria o path do JSON
+    # path para salvar
+    save = save_dir / f"{algoritmo}_teste.json"
+    content = [] # conteudo
     
-    with open(json_path, "a", encoding="UTF-8") as file:
-        json.dump(dados, file, indent=4, ensure_ascii=False)  # Cria arquivo
-        file.write(",\n")
-    
-    print(f"Arquivo JSON criado em: {json_path}")
+    # Abre no modo leitura 
+    with open(save, "r", encoding="UTF-8") as file:
+        dados = json.load(file) # ler todos os dados do arquivo
+        for js in dados:
+            content.append(js)
+            
+        content.append(dado) # Adiciona o novo valor
+        
+    # Abre no modo escrita, para apagar o que tinha antes
+    with open(save, "w", encoding="UTF-8") as file:
+        # Escreve o conteudo novo junto com o anterior
+        json.dump(content, file, indent=4, ensure_ascii=False) 

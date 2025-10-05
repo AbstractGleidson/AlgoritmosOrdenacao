@@ -18,11 +18,11 @@ def shell_sort(arr: List[str]) -> List[str]:
     ...
 
 def quick_sort(arr: List[str]) -> List[str]:
-    """Ordena uma lista de strings no intervalo [low, high] usando Quick Sort."""
+    """Ordena uma lista de strings no intervalo usando Quick Sort."""
     ...
 
 def merge_sort(arr: List[str]) -> List[str]:
-    """Ordena uma lista de strings no intervalo [left, right] usando Merge Sort."""
+    """Ordena uma lista de strings no intervalo usando Merge Sort."""
     ...
 
 def heap_sort(arr: List[str]) -> List[str]:

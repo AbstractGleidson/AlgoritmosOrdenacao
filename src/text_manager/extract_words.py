@@ -1,9 +1,9 @@
-def extract_words(path) -> list[str]:
+def extract_words(path: str) -> list[str]:
     """
     Args:
         path (str): caminho do arquivo para ser lido
     Returns:
-        list[str] | None: lista das palavras contidas no arquivo
+        list[str] | []: lista das palavras contidas no arquivo
     """
     try:
         # Abre o arquivo
