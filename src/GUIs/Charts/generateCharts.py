@@ -28,7 +28,3 @@ class MplCanvas(FigureCanvas):
                 soma += data[j]["tempo"]
             dados[tam[i]] = (soma/len(data))
         return dados
-
-        
-
-

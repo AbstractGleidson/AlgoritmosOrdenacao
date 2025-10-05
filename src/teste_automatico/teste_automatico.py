@@ -26,9 +26,14 @@ class AutoTeste(QThread):
     def run(self):
         tempo_exec = 0.0
         
+        text = clear_arq_text(self.path)
+        
+        if self.algoritmo in ["bubblesort", "selectionsort", "insertionsort"]:
+            text = text[0:30000]
+        
         # roda 5 vezes e soma os tempos
         for _ in range(5):
-            words = clear_arq_text(self.path)
+            words = text
 
             start = time.process_time()   # mais apropriado para medir wall-clock
             # chama o algoritmo selecionado (sincrono)
