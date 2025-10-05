@@ -7,7 +7,7 @@
 ![Git](https://img.shields.io/badge/Git-Versionamento-orange?logo=git&logoColor=white)
 
 
-Este projeto tem como objetivo **testar algoritmos de ordenação**, com foco na **prática de conceitos de Estrutura de Dados**, principalmente os **algoritmos de ordenação**, implementadas com **a limguagem C++**.
+Este projeto tem como objetivo **testar algoritmos de ordenação**, com foco na **prática de conceitos de Estrutura de Dados**, principalmente os **algoritmos de ordenação**, implementadas com **a linguagem C++**.
 
 ---
 
@@ -44,6 +44,7 @@ Este projeto tem como objetivo **testar algoritmos de ordenação**, com foco na
 Com python instalado:
 ```bash
 git clone "https://github.com/AbstractGleidson/AlgoritmosOrdenacao.git"
+cd AlgoritmosOrdenacao
 pip install -r requirements.txt
 cd src 
 python main.py
