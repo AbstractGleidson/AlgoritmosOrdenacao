@@ -414,7 +414,7 @@ class MyWindow(QMainWindow):
 
             # Adiciona os elementos no layout
             layout.addWidget(label, alignment=Qt.AlignmentFlag.AlignCenter)
-            layout.addWidget(progress, Qt.AlignmentFlag.AlignCenter)
+            layout.addWidget(progress, alignment=Qt.AlignmentFlag.AlignCenter)
 
             # Renderiza o diálogos
             self.loading_dialog.setLayout(layout)
