@@ -1,6 +1,6 @@
 # Cria de fato a interface da aplicacao
 # Para futuras modificacao, e interessante implementar um esquema de navegacao usando QStackedWidget
-from PySide6.QtWidgets import QMainWindow, QWidget, QCheckBox, QListWidget, QStyle, QFileDialog  # Principais widgets
+from PySide6.QtWidgets import QMainWindow, QWidget, QCheckBox, QListWidget, QStyle, QFileDialog, QDialog, QProgressBar # Principais widgets
 from PySide6.QtWidgets import QGridLayout, QHBoxLayout, QVBoxLayout, QPushButton, QLabel, QComboBox, QLineEdit, QListView, QAbstractItemView
 from PySide6.QtGui import QFont, QIcon, QStandardItemModel, QStandardItem
 from PySide6.QtCore import Qt, QThread, Signal
@@ -16,14 +16,15 @@ import asyncio
 
 # Herda QMainWindow para ter acesso a alguns componentes da janela em si, como title e icon 
 class MyWindow(QMainWindow):
-    finished = Signal(float) # Sinal que terminou a execucao do algoritimo no caso de um teste de ordenacao
+    finished = Signal(float) # Sinal que terminou a execucao do algorítimo no caso de um teste de ordenacao
     
     def __init__(self):
         super().__init__()
         self.colors = []
         self.errorMessage = None # Gerencia a messagem de erro na leitura de dado, se ela deve ser exibida ou nao
         self.fileName = None # Gerencia o arquivo que será enviado para ordenar 
-        self.algorithm = None # Gerencia o algoritmo escolhido para ordenação
+        self.algorithm = None # Gerencia o algorítmo escolhido para ordenação
+        self.loading_dialog = None  # Gerencia o diálogo de carregamento
         self.autoTeste = None # Gerencia o teste automatico
 
 
@@ -79,6 +80,7 @@ class MyWindow(QMainWindow):
         # Seletor de Algoritmo para escolher quem vai ser usado
         label_select = QLabel("Selecione o algoritmo:")
         label_select.setFont(FONT)
+    
         self.combo_algorithms = QComboBox()
         self.combo_algorithms.setFont(FONT)
         self.combo_algorithms.addItems(["Bubble Sort", "Selection Sort" , "Insertion Sort" , "Shell Sort", "Quick Sort", "Merge Sort", "Heap Sort"])
@@ -301,29 +303,46 @@ class MyWindow(QMainWindow):
         # widget e layout da tela
         widget = QWidget()
         layout = QVBoxLayout()
-        
-        # Seletor de Algoritmo para escolher quem vai ser usado
-        self.label_select_file = QLabel("Nenhum Arquivo selecionado:")
+
+        layout.setContentsMargins(0, 20, 0, 250) # Mergin no final e no inicio
+
+
+        # Seletor de Algorítmo
+        label_select_algorithm = QLabel("Selecione o algoritmo:")
+        label_select_algorithm.setFont(FONT)
+        label_select_algorithm.setFixedSize(600, 30)
+        label_select_algorithm.setMargin(0)
+        self.combo_algorithms = QComboBox()
+        self.combo_algorithms.setFont(FONT)
+        self.combo_algorithms.addItems(["Bubble Sort", "Selection Sort" , "Insertion Sort" , "Shell Sort", "Quick Sort", "Merge Sort", "Heap Sort"])
+        self.combo_algorithms.setFixedSize(600, 60)
+
+        # Seletor de arquivo para escolher quem vai ser usado
+        self.label_select_file = QLabel("Nenhum Arquivo selecionado")
         self.label_select_file.setFont(FONT)
+        self.label_select_file.setFixedSize(600, 30)
+        self.label_select_file.setMargin(0)
         self.file_button = QPushButton("Selecionar arquivo")
         self.file_button.setFont(FONT)                # usa a mesma fonte do label
-        self.file_button.setFixedSize(300, 40) 
+        self.file_button.setFixedSize(600, 60) 
         self.file_button.clicked.connect(self.selectFile)
 
         # Botao para confirmar os dados 
         button_find = QPushButton("Enviar")
         button_find.setFont(FONT)
-        button_find.setFixedSize(150, 40)
+        button_find.setFixedSize(600, 60)
         button_find.clicked.connect(self.showMessageDialog)
 
         # Botão para voltar pro menu principal
         button_back = QPushButton("Voltar")
         button_back.setFont(FONT)
-        button_back.setFixedSize(150, 40)
+        button_back.setFixedSize(600, 60)
         button_back.clicked.connect(self.showMainMenu)
 
         # Adiciona os Widgets no layout
-        layout.addWidget(self.label_select_file, alignment=Qt.AlignmentFlag.AlignCenter)
+        layout.addWidget(label_select_algorithm, alignment=Qt.AlignmentFlag.AlignLeft)
+        layout.addWidget(self.combo_algorithms, alignment=Qt.AlignmentFlag.AlignCenter)
+        layout.addWidget(self.label_select_file, alignment=Qt.AlignmentFlag.AlignLeft)
         layout.addWidget(self.file_button, alignment=Qt.AlignmentFlag.AlignCenter)
         layout.addWidget(button_find, alignment=Qt.AlignmentFlag.AlignCenter)
         layout.addWidget(button_back, alignment=Qt.AlignmentFlag.AlignCenter)
@@ -341,10 +360,33 @@ class MyWindow(QMainWindow):
             
     def showMessageDialog(self):
         arquivo = self.fileName
-        algoritmo = "quicksort" # Troca pela leitura do nome 
-        
+        self.algorithm = self.combo_algorithms.currentText().lower().replace(" ", "") 
+        algoritmo = self.algorithm      
+
         if arquivo:
-            
+            # Cria o fiálogo de carregamento
+            self.loading_dialog = QDialog(self)
+            self.loading_dialog.setWindowTitle("Processando")
+            self.loading_dialog.setModal(True)
+
+            layout = QVBoxLayout()
+            layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+            # Barra de Carregamento
+            label = QLabel("Executando algoritmo, aguarde...")
+            label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+            progress = QProgressBar()
+            progress.setRange(0,0)
+
+            # Adiciona os elementos no layout
+            layout.addWidget(label, alignment=Qt.AlignmentFlag.AlignCenter)
+            layout.addWidget(progress, alignment=Qt.AlignmentFlag.AlignCenter)
+
+            # Renderiza o diálogos
+            self.loading_dialog.setLayout(layout)
+            self.loading_dialog.setFixedSize(400, 100)
+            self.loading_dialog.show() 
+
             # Cria e conecta o sinal
             self.autoTeste = AutoTeste(algoritmo, arquivo)
             self.autoTeste.finished.connect(self.end_exec)
@@ -356,7 +398,37 @@ class MyWindow(QMainWindow):
     def end_exec(self, tempo_exec):
         print(f"Tempo de execução: {tempo_exec:.2f}s")
         self.autoTeste = None  # Libera referência depois de terminar
-           
+        if self.loading_dialog and self.loading_dialog.isVisible():
+            self.loading_dialog.close()
+            self.loading_dialog = None
+
+        # Cria o diálogo que entregará o resultado ao usuário
+        self.result = QDialog(self)
+        self.result.setWindowTitle("Resultados")
+        self.result.setModal(True)
+
+        layout = QVBoxLayout()
+        layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        
+        # Mensagens apresentadas ao usuário
+        label_algoritmo = QLabel(f"Algoritmo escolhido: {self.algorithm}")
+        label_algoritmo.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        label_arquivo = QLabel(f"Arquivo escolhido: {os.path.basename(self.fileName)}")
+        label_arquivo.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        label_result = QLabel(f"Tempo Médio de Execução: {tempo_exec:.3f}s")
+        label_result.setAlignment(Qt.AlignmentFlag.AlignLeft)
+
+        # adiciona os widgets ao layout
+        layout.addWidget(label_algoritmo)
+        layout.addWidget(label_arquivo)
+        layout.addWidget(label_result)
+
+        # Renderiza o diálogos
+        self.result.setLayout(layout)
+        self.result.setFixedSize(400, 100)
+        self.result.show()
+          
+
     # Sai da aplicacao
     def exitAplication(self):
         sys.exit()
