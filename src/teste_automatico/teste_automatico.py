@@ -1,6 +1,6 @@
 import time
 from package_sortlib import sortlib
-from text_manager.extract_words import extract_words
+from text_manager.text_treatment import clear_arq_text
 from PySide6.QtCore import QThread, Signal
 
 # Classe que realiza o teste de forma automatica em paralelo
@@ -28,7 +28,7 @@ class AutoTeste(QThread):
         
         # roda 5 vezes e soma os tempos
         for _ in range(5):
-            words = extract_words(self.path)
+            words = clear_arq_text(self.path)
 
             start = time.process_time()   # mais apropriado para medir wall-clock
             # chama o algoritmo selecionado (sincrono)
