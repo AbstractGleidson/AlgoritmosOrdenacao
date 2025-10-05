@@ -2,7 +2,10 @@
 ![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python&logoColor=white)
 ![C++](https://img.shields.io/badge/C++-17-blue?logo=cplusplus&logoColor=white)
 ![PySide6](https://img.shields.io/badge/PySide6-GUI-brightgreen?logo=qt&logoColor=white)
+![pybind11](https://img.shields.io/badge/pybind11-C%2B%2B%20Bindings-blue?logo=python&logoColor=white)
+![Matplotlib](https://img.shields.io/badge/Matplotlib-Gráficos%202D-red?logo=plotly&logoColor=white)
 ![Git](https://img.shields.io/badge/Git-Versionamento-orange?logo=git&logoColor=white)
+
 
 Este projeto tem como objetivo **testar algoritimos de ordenação**, com foco na **prática de conceitos de Estrutura de Dados**, principalmente os **algoritimos de ordenação**, implementadas com **a limguagem C++**.
 
@@ -18,9 +21,11 @@ Este projeto tem como objetivo **testar algoritimos de ordenação**, com foco n
 ## 🛠️ Ferramentas Utilizadas
 - **[Python](https://www.python.org/)** — linguagem de programação principal do projeto.  
 - **[C++](https://devdocs.io/cpp/)** - limguagem usada para implementar os algoritimos de ordenação.
-- **[PySide6](https://doc.qt.io/qtforpython-6/)** — biblioteca para construção de interfaces gráficas (GUI).  
+- **[Pybind11](https://pybind11.readthedocs.io/en/stable/)** - biblioteca python que facilita a criação de pacotes escritos em c++ para python.
+- **[Setuptools](https://setuptools.pypa.io/en/latest/)** - biblioteca de suporte para o Pybind11, responsável pelo empacotamento e geração dos módulos compilados, .so no Linux e .pyd no Windows.
+- **[PySide6](https://doc.qt.io/qtforpython-6/)** - biblioteca para construção de interfaces gráficas (GUI).  
+- **[Matplotlib](https://matplotlib.org/stable/users/index.html)** - biblioteca usada para criar os gráficos.
 - **[Git](https://git-scm.com/)** — versionamento e controle do código.  
-
 ---
 
 ## ⚙️ Funcionalidades
@@ -32,8 +37,8 @@ Este projeto tem como objetivo **testar algoritimos de ordenação**, com foco n
     - Merge Sort
     - Quick Sort
     - Heap Sort
-- **Reiniciar testes** - Reinicia os testes do algoritimo escolhido passando um arquivo texto com palavras para ordenar. 
-- **Comparação de algoritimos** - Compara dois algoritimos por tempo de execução.  
+- **Realizar teste de algoritmo** - Realiza 5 testes com o algoritmo escolhido e o arquivo com palavras para ser ordenado. Mostrando no final a média do tempo de CPU gasto.
+- **Comparação de algoritimos** - Compara dois algoritimos por tempo de CPU gasto na execução.  
 ---
 ## Como testar
 Com python instalado:

@@ -1,27 +1,27 @@
 [
     {
-        "algoritimo": "insertion_sort_500",
+        "algoritmo": "insertion_sort_500",
         "quantidade_palavras": 500,
-        "tempo": 1290.1875
+        "tempo": 1280.53125
     },
     {
-        "algoritimo": "insertion_sort_500",
+        "algoritmo": "insertion_sort_500",
         "quantidade_palavras": 500,
-        "tempo": 1261.546875
+        "tempo": 1247.46875
     },
     {
-        "algoritimo": "insertion_sort_500",
+        "algoritmo": "insertion_sort_500",
         "quantidade_palavras": 500,
-        "tempo": 1243.046875
+        "tempo": 1264.546875
     },
     {
-        "algoritimo": "insertion_sort_500",
+        "algoritmo": "insertion_sort_500",
         "quantidade_palavras": 500,
-        "tempo": 1259.953125
+        "tempo": 1283.21875
     },
     {
-        "algoritimo": "insertion_sort_500",
+        "algoritmo": "insertion_sort_500",
         "quantidade_palavras": 500,
-        "tempo": 1255.984375
+        "tempo": 1258.6875
     }
 ]
