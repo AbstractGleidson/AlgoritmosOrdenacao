@@ -40,7 +40,7 @@ class MyWindow(QMainWindow):
         widget = QWidget() # Widget generico
         layout = QVBoxLayout() # Box vertical
         
-        layout.setContentsMargins(0, 75, 0, 100) # Mergin no final e no inicio
+        layout.setContentsMargins(0, 80, 0, 100) # Mergin no final e no inicio
 
         # Plota os gráficos usando os dados de ordenação
         button_view_graph = buttonMainMenu("Visualizar gráficos de desempenho")
@@ -105,7 +105,7 @@ class MyWindow(QMainWindow):
         # Botão para voltar pro menu principal
         button_back = QPushButton("Voltar")
         button_back.setFont(FONT)
-        button_back.setFixedSize(150, 40)
+        button_back.setFixedSize(200, 40)
         button_back.clicked.connect(self.showMainMenu)
 
         # Adiciona os botões e o gráfico no layout do widget
@@ -114,6 +114,7 @@ class MyWindow(QMainWindow):
         layout.addWidget(self.canvas)
         layout.addWidget(button_plot, alignment=Qt.AlignmentFlag.AlignCenter)
         layout.addWidget(button_back, alignment=Qt.AlignmentFlag.AlignCenter)
+        layout.setContentsMargins(20, 0, 20, 40)
 
         widget.setLayout(layout)
         self.setCentralWidget(widget) # Renderiza na tela o widget criado
@@ -226,7 +227,7 @@ class MyWindow(QMainWindow):
         # Botão para voltar pro menu principal
         button_back = QPushButton("Voltar")
         button_back.setFont(FONT)
-        button_back.setFixedSize(150, 40)
+        button_back.setFixedSize(200, 40)
         button_back.clicked.connect(self.showMainMenu)
 
         # Canvas do matplotlib
@@ -347,7 +348,7 @@ class MyWindow(QMainWindow):
         self.combo_algorithms = QComboBox()
         self.combo_algorithms.setFont(FONT)
         self.combo_algorithms.addItems(["Bubble Sort", "Selection Sort" , "Insertion Sort" , "Shell Sort", "Quick Sort", "Merge Sort", "Heap Sort"])
-        self.combo_algorithms.setFixedSize(560, 60)
+        self.combo_algorithms.setFixedSize(560, 40)
 
         # Seletor de arquivo para escolher quem vai ser usado
         self.label_select_file = QLabel("Nenhum Arquivo selecionado")
