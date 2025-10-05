@@ -394,8 +394,8 @@ class MyWindow(QMainWindow):
     def showMessageDialog(self):
         arquivo = self.fileName
         self.algorithm = self.combo_algorithms.currentText().lower().replace(" ", "") 
-        algoritmo = self.algorithm      
-
+        algoritmo = self.algorithm   
+        
         if arquivo:
             # Cria o fiálogo de carregamento
             self.loading_dialog = QDialog(self)
@@ -410,10 +410,11 @@ class MyWindow(QMainWindow):
             label.setAlignment(Qt.AlignmentFlag.AlignCenter)
             progress = QProgressBar()
             progress.setRange(0,0)
+            progress.setAlignment(Qt.AlignmentFlag.AlignCenter)  # Alinha barra de progresso
 
             # Adiciona os elementos no layout
             layout.addWidget(label, alignment=Qt.AlignmentFlag.AlignCenter)
-            layout.addWidget(progress, alignment=Qt.AlignmentFlag.AlignCenter)
+            layout.addWidget(progress, Qt.AlignmentFlag.AlignCenter)
 
             # Renderiza o diálogos
             self.loading_dialog.setLayout(layout)
