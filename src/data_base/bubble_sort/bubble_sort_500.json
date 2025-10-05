@@ -1,27 +1,27 @@
 [
     {
-        "algoritimo": "bubble_sort_500",
+        "algoritmo": "bubble_sort_500",
         "quantidade_palavras": 500,
-        "tempo": 1453.84375
+        "tempo": 1299.375
     },
     {
-        "algoritimo": "bubble_sort_500",
+        "algoritmo": "bubble_sort_500",
         "quantidade_palavras": 500,
-        "tempo": 1419.625
+        "tempo": 1293.890625
     },
     {
-        "algoritimo": "bubble_sort_500",
+        "algoritmo": "bubble_sort_500",
         "quantidade_palavras": 500,
-        "tempo": 1327.609375
+        "tempo": 1294.265625
     },
     {
-        "algoritimo": "bubble_sort_500",
+        "algoritmo": "bubble_sort_500",
         "quantidade_palavras": 500,
-        "tempo": 1315.25
+        "tempo": 1294.71875
     },
     {
-        "algoritimo": "bubble_sort_500",
+        "algoritmo": "bubble_sort_500",
         "quantidade_palavras": 500,
-        "tempo": 1315.984375
+        "tempo": 1293.234375
     }
 ]
