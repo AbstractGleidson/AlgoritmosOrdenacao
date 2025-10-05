@@ -1,4 +1,4 @@
-// Implementacao do algoritimo de ordenacao heapsort
+// Implementacao do algoritmo de ordenacao heapsort
 #include "heap_sort.h"
 #include <vector>
 #include <string>
@@ -6,9 +6,9 @@
 
 // Função auxiliar para rebalancear o heap
 void heapify(std::vector<std::string>& arr, int n, int i) {
-    int largest = i; // raiz
-    int l = 2 * i + 1; // filho esquerdo
-    int r = 2 * i + 2; // filho direito
+    int largest = i; // Raiz
+    int l = 2 * i + 1; // Filho esquerdo
+    int r = 2 * i + 2; // Filho direito
 
     if (l < n && arr[l] > arr[largest])
         largest = l;

@@ -1,4 +1,4 @@
-// Implementacao do algoritimo de ordenacao selectionsort
+// Implementacao do algoritmo de ordenacao selectionsort
 #include "selection_sort.h"
 
 // Selection Sort para strings

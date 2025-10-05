@@ -1,4 +1,4 @@
-// Implementacao do algoritimo de ordenacao shellsort
+// Implementacao do algoritmo de ordenacao shellsort
 #include "shell_sort.h"
 
 // Shell Sort para strings

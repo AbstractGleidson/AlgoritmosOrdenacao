@@ -1,4 +1,4 @@
-// Implementacao do algoritimo de ordenacao insertionsort
+// Implementacao do algoritmo de ordenacao insertionsort
 #include "insertion_sort.h"
 
 // Insertion Sort para strings
