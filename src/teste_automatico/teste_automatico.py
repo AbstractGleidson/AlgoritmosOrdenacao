@@ -28,8 +28,10 @@ class AutoTeste(QThread):
         
         text = clear_arq_text(self.path)
         
+        # Limitacao, pois esse algoritimos sao muito pesados 
+        # E a maioria dos computadores nao consegue rodar eles com apenas 1 nucleo
         if self.algoritmo in ["bubblesort", "selectionsort", "insertionsort"]:
-            text = text[0:30000]
+            text = text[0:25000]
         
         # roda 5 vezes e soma os tempos
         for _ in range(5):
