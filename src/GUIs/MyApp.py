@@ -414,7 +414,7 @@ class MyWindow(QMainWindow):
 
             # Adiciona os elementos no layout
             layout.addWidget(label, alignment=Qt.AlignmentFlag.AlignCenter)
-            layout.addWidget(progress, Qt.AlignmentFlag.AlignCenter)
+            layout.addWidget(progress, alignment=Qt.AlignmentFlag.AlignCenter)
 
             # Renderiza o diálogos
             self.loading_dialog.setLayout(layout)
@@ -451,15 +451,18 @@ class MyWindow(QMainWindow):
         label_arquivo.setAlignment(Qt.AlignmentFlag.AlignLeft)
         label_result = QLabel(f"Tempo Médio de Execução: {tempo_exec:.3f}s")
         label_result.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        label_obs = QLabel("Obs: Algorítmos com complexidade O(n²) são\nlimitados à testes com 25 mil itens")
+        label_obs.setAlignment(Qt.AlignmentFlag.AlignLeft)
 
         # adiciona os widgets ao layout
         layout.addWidget(label_algoritmo)
         layout.addWidget(label_arquivo)
         layout.addWidget(label_result)
-
+        if self.algorithm in ["bubblesort", "selectionsort", "insertionsort"]:
+            layout.addWidget(label_obs)
         # Renderiza o diálogos
         self.result.setLayout(layout)
-        self.result.setFixedSize(400, 100)
+        self.result.setFixedSize(400, 140)
         self.result.show()
           
 
